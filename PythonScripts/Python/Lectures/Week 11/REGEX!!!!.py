@@ -15,3 +15,31 @@ output = SSNregex(text)
 product = open("socialtestfinal.txt", "w")
 product.write(output)
 product.close()
+
+
+# way faster than using while loops and if statements
+
+def longWayAround(text):
+    SSN = False
+    i = 0
+    output = ""
+    while i < len(text) + 10:
+        if text[i] in "1234567890" and text[i+1] in "1234567890" and text[i+2] in "1234567890":
+            if text[i+3] == "-":
+                if text[i+4] in "1234567890"and text[i+5] in "1234567890":
+                    if text[i+6] == "-":
+                        if text[i+7] in "1234567890" and text[i+8] in "1234567890" and text[i+9] in "1234567890" and text[i+10] in "1234567890":
+                            SSN = True
+        if SSN == True:
+            output += "REDACTED"
+            i += 11
+        else:
+            output += text[i]
+            i += 1
+        
+        SSN = False
+
+    return output
+    
+output = longWayAround(text)
+print(output)
