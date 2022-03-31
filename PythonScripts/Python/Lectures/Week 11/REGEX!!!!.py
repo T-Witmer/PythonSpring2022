@@ -41,10 +41,9 @@ def longWayAround(text):
 
     return output
 text = "My social is 123-12-1234 LMAO!"
-output = longWayAround(text)
-print(output)
+output2 = longWayAround(text)
 
-
-product = open("socialtestfinal.txt", "w")
-product.write(output)
+product = open("socialtestfinal.txt", "a")
+product.write("\n")
+product.write(output2)
 product.close()
