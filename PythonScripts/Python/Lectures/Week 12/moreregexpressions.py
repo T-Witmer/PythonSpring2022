@@ -27,11 +27,57 @@ question = r"ab?a" #for zero to one
 def redactphone(filein, fileout):
     data = open(filein,"r")
     text = data.read()
-    phonenumber = r"(*\d{3})*-* *\d{3}-*\d{4}"
+    phonenumber = r"(?\d{3})?-? ?\d{3}-?\d{4}"
     output = re.sub(phonenumber, "REDACTED", filein)
     write = open(fileout, "w")
     write.write(output)
     write.close()
 
 redactphone("phonenumber.txt", "output.txt")
+
+import random
+
+def rolld6():
+    return random.randint(1,6)
+
+def turn():
+    die1 = rolld6()
+    die2 = rolld6()
+    if die1 == die2:
+        die1 = rolld6()
+        die2 = rolld6()
+        if die1 != die2:
+            return 1
+        elif die1 == die2:
+            die1 = rolld6()
+            die2 = rolld6()
+            if die1 != die2:
+                return 2
+            elif die1 == die2:
+                return 3  
+    return 0
+
+
+trials = 10000
+nodubs = 0
+onedubs = 0
+twodubs = 0
+threedubs = 0
+for i in range(trials):
+    result = turn()
+    if result == 0:
+        nodubs += 1
+    elif result == 1:
+        onedubs += 1
+    elif result == 2:
+        twodubs += 1
+    elif result == 3:
+        threedubs += 1   
+
+
+
+
+
+
+
 
